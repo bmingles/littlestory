@@ -1,35 +1,44 @@
-import { engineInit } from 'littlejsengine'
+import { engineInit, tile, vec2 } from 'littlejsengine'
 import { Level } from './Level'
-
-const level = new Level()
+import { fetchLevelData } from './util'
+import type { LevelData } from './model'
 
 export class Game {
-  init() {
-    level.init()
-  }
+  static start = async (startLevelId: string, rootEl?: HTMLElement) => {
+    const startLevelData = await fetchLevelData(startLevelId)
 
-  update() {}
+    const { init, update, updatePost, render, renderPost } = new Game(
+      startLevelData,
+    )
 
-  updatePost() {}
-
-  render() {
-    level.render()
-  }
-
-  renderPost() {
-    // drawTextScreen('Hello World!', mainCanvasSize.scale(0.5), 80)
-  }
-
-  async start(rootEl?: HTMLElement) {
     engineInit(
-      this.init,
-      this.update,
-      this.updatePost,
-      this.render,
-      this.renderPost,
-      ['/Level_0/_composite.png'],
-      //['tiles.png'], //'tilesLevel.png'],
+      init,
+      update,
+      updatePost,
+      render,
+      renderPost,
+      [startLevelData.imageUrl.href],
       rootEl,
     )
+  }
+
+  private constructor(startLevelData: LevelData) {
+    this._startLevelData = startLevelData
+  }
+
+  private readonly _startLevelData: LevelData
+
+  init = () => {
+    new Level(this._startLevelData)
+  }
+
+  update = () => {}
+
+  updatePost = () => {}
+
+  render = () => {}
+
+  renderPost = () => {
+    // drawTextScreen('Hello World!', mainCanvasSize.scale(0.5), 80)
   }
 }

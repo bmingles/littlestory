@@ -6,10 +6,7 @@ export function Game() {
   let rootRef!: HTMLDivElement
 
   createEffect(async () => {
-    const response = await fetch('/Level_0/data.json')
-    const levelData = await response.json()
-
-    await new GameObject().start(rootRef)
+    await GameObject.start('Level_0', rootRef)
   })
 
   return (

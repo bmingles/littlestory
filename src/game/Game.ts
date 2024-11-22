@@ -1,4 +1,4 @@
-import { engineInit, tile, vec2 } from 'littlejsengine'
+import { engineInit } from 'littlejsengine'
 import { Level } from './Level'
 import { fetchLevelData } from './util'
 import type { LevelData } from './model'
@@ -30,6 +30,12 @@ export class Game {
 
   init = () => {
     new Level(this._startLevelData)
+
+    for (const [entityType, entityData] of Object.entries(
+      this._startLevelData.entities,
+    )) {
+      console.log(entityType, entityData)
+    }
   }
 
   update = () => {}

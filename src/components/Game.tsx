@@ -6,16 +6,10 @@ export function Game() {
   let rootRef!: HTMLDivElement
 
   createEffect(async () => {
-    const response = await fetch('/map/simplified/Level_0/data.json')
+    const response = await fetch('/Level_0/data.json')
     const levelData = await response.json()
 
-    await new GameObject().start()
-
-    // littlejs creates 3 canvases. Move them under our root element
-    const canvasEls = document.querySelectorAll('canvas')!
-
-    document.body.replaceChildren(rootRef)
-    rootRef.append(...canvasEls)
+    await new GameObject().start(rootRef)
   })
 
   return (

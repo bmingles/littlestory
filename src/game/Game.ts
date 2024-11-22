@@ -27,7 +27,7 @@ export class Game {
       this.updatePost,
       this.render,
       this.renderPost,
-      ['/map/simplified/Level_0/Tiles.png'],
+      ['/Level_0/_composite.png'],
       //['tiles.png'], //'tilesLevel.png'],
       rootEl,
     )

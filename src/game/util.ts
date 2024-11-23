@@ -5,7 +5,7 @@ import type { LevelData } from './model'
  * @param id level id
  */
 export async function fetchLevelData(id: string): Promise<LevelData> {
-  const storageUrl = new URL(`${id}/`, location.href)
+  const storageUrl = new URL(`levels/${id}/`, location.href)
   const dataUrl = new URL('data.json', storageUrl)
   const response = await fetch(dataUrl)
   const levelData: LevelData = await response.json()

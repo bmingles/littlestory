@@ -1,4 +1,6 @@
-src_dir=art/map/simplified/Level_0
+cp art/tileset.png public/
+
+src_dir=art/map/simplified/level_0
 target_dir=public/levels/level-0
 
 mkdir -p $target_dir

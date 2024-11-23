@@ -1,6 +1,17 @@
+import type { Vector2 } from 'littlejsengine'
+
+export type EntityType = 'gem' | 'heart'
+
+export type TileData = [
+  pos?: number | Vector2,
+  size?: number | Vector2,
+  textureIndex?: number,
+  padding?: number,
+]
+
 /* LDTK entity data */
 export interface EntityData {
-  id: string
+  id: EntityType
   iid: string
   layer: string
   x: number

@@ -1,5 +1,5 @@
 {
-	"identifier": "Level_0",
+	"identifier": "level_0",
 	"uniqueIdentifer": "1a8f9880-9b00-11ef-bce4-4fff40ce7e69",
 	"x": 0,
 	"y": 0,
@@ -9,62 +9,73 @@
 	"neighbourLevels": [],
 	"customFields" : {},
 	"layers": [
-		"Tiles.png"
+		"tiles.png"
 	],
 	"entities": {
-		"Heart": [
+		"heart": [
 			{
-				"id": "Heart",
+				"id": "heart",
 				"iid": "e13a90c0-9b00-11ef-97a9-75adb5a95f5f",
-				"layer": "Entities2",
-				"x": 112,
-				"y": 64,
+				"layer": "entities2",
+				"x": 128,
+				"y": 32,
 				"width": 16,
 				"height": 16,
 				"color": 12470831,
 				"customFields" : {}
 			},
 			{
-				"id": "Heart",
+				"id": "heart",
 				"iid": "34415df0-9b00-11ef-bce4-89456ef7c806",
-				"layer": "Entities",
-				"x": 96,
-				"y": 112,
+				"layer": "entities",
+				"x": 0,
+				"y": 240,
 				"width": 16,
 				"height": 16,
 				"color": 12470831,
 				"customFields" : {}
 			},
 			{
-				"id": "Heart",
+				"id": "heart",
 				"iid": "1e475390-9b00-11ef-97a9-cfe9f8d9411f",
-				"layer": "Entities",
-				"x": 192,
-				"y": 176,
+				"layer": "entities",
+				"x": 240,
+				"y": 0,
 				"width": 16,
 				"height": 16,
 				"color": 12470831,
 				"customFields" : {}
 			}
 		],
-		"Coin": [
+		"gem": [
 			{
-				"id": "Coin",
-				"iid": "30416090-9b00-11ef-97a9-212bf80e0cdf",
-				"layer": "Entities",
-				"x": 32,
-				"y": 192,
+				"id": "gem",
+				"iid": "6e02b640-9b00-11ef-97a9-f56e0dbcce01",
+				"layer": "entities",
+				"x": 128,
+				"y": 112,
 				"width": 16,
 				"height": 16,
 				"color": 14120515,
 				"customFields" : {}
 			},
 			{
-				"id": "Coin",
-				"iid": "30eb5c30-9b00-11ef-97a9-275d42eba05d",
-				"layer": "Entities",
-				"x": 16,
-				"y": 192,
+				"id": "gem",
+				"iid": "d3f90d80-9b00-11ef-97a9-bba81b18d557",
+				"layer": "entities",
+				"x": 0,
+				"y": 0,
+				"width": 16,
+				"height": 16,
+				"color": 14120515,
+				"customFields" : {}
+			},
+			{
+				"id": "gem",
+				"iid": "d645bca0-9b00-11ef-97a9-7f47ae4a4ecc",
+				"layer": "entities",
+				"x": 240,
+				"y": 240,
 				"width": 16,
 				"height": 16,
 				"color": 14120515,

@@ -1,6 +1,6 @@
 import { EngineObject, mod, tileSizeDefault, vec2 } from 'littlejsengine'
 import type { AnimationID, EntityData } from './model'
-import { TileCache } from './TileCache'
+import { Sprite } from './Sprite'
 
 export class Entity extends EngineObject {
   constructor(entity: EntityData, animation: AnimationID = 'idle') {
@@ -24,15 +24,16 @@ export class Entity extends EngineObject {
     super.update()
 
     const speed = 0.2
-    const frames =
-      TileCache.get(this.entity.id, this.animation).data.frames ?? 1
-    this.animationFrame = mod(this.animationFrame + speed, frames)
+    this.animationFrame = this.animationFrame + speed
   }
 
   render() {
     super.render()
 
-    this.tileInfo = TileCache.get(this.entity.id, this.animation).info.frame(
+    this.tileInfo = Sprite.tileInfo(
+      this.entity.id,
+      this.animation,
+      'S',
       Math.floor(this.animationFrame),
     )
   }

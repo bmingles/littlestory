@@ -2,18 +2,20 @@ import { engineInit, setCameraPos, tileSizeDefault, vec2 } from 'littlejsengine'
 import { Level } from './Level'
 import { fetchLevelData } from './util'
 import type { LevelData } from './model'
-import { TileCache } from './TileCache'
+import { Sprite } from './Sprite'
 
 export class Game {
   static start = async (startLevelId: string, rootEl?: HTMLElement) => {
     const startLevelData = await fetchLevelData(startLevelId)
 
-    TileCache.init({
-      gem: { idle: { pos: 1719, textureMatch: 'tileset' } },
-      heart: { idle: { pos: 3052, textureMatch: 'tileset' } },
+    Sprite.init({
+      gem: { idle: { S: { pos: 1719, textureMatch: 'tileset' } } },
+      heart: { idle: { S: { pos: 3052, textureMatch: 'tileset' } } },
       player: {
-        idle: { pos: 0, size: 128, textureMatch: 'hero-idle' },
-        walk: { pos: 0, size: 128, textureMatch: 'hero-walk', frames: 8 },
+        idle: { S: { pos: 0, size: 128, textureMatch: 'hero-idle' } },
+        walk: {
+          S: { pos: 0, size: 128, textureMatch: 'hero-walk', frames: 8 },
+        },
       },
     })
 

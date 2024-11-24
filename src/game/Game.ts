@@ -9,8 +9,12 @@ export class Game {
     const startLevelData = await fetchLevelData(startLevelId)
 
     TileCache.init({
-      gem: [1719, 16],
-      heart: [3052, 16],
+      gem: { idle: { pos: 1719, textureMatch: 'tileset' } },
+      heart: { idle: { pos: 3052, textureMatch: 'tileset' } },
+      player: {
+        idle: { pos: 0, size: 128, textureMatch: 'hero-idle' },
+        walk: { pos: 0, size: 128, textureMatch: 'hero-walk', frames: 8 },
+      },
     })
 
     const { init, update, updatePost, render, renderPost } = new Game(
@@ -23,7 +27,11 @@ export class Game {
       updatePost,
       render,
       renderPost,
-      ['/tileset.png', startLevelData.imageUrl.href],
+      [
+        '/tileset.png',
+        '/animations/hero-walk.png',
+        startLevelData.imageUrl.href,
+      ],
       rootEl,
     )
   }

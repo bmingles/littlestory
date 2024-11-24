@@ -81,6 +81,19 @@
 				"color": 14120515,
 				"customFields" : {}
 			}
+		],
+		"player": [
+			{
+				"id": "player",
+				"iid": "22100230-9b00-11ef-b508-7de6ace66921",
+				"layer": "entities",
+				"x": 112,
+				"y": 160,
+				"width": 16,
+				"height": 16,
+				"color": 15389866,
+				"customFields" : {}
+			}
 		]
 	}
 }

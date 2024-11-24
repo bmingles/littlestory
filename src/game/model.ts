@@ -1,13 +1,20 @@
 import type { Vector2 } from 'littlejsengine'
 
-export type EntityType = 'gem' | 'heart'
+export type EntityType = 'gem' | 'heart' | 'player'
 
-export type TileData = [
-  pos?: number | Vector2,
-  size?: number | Vector2,
-  textureIndex?: number,
-  padding?: number,
-]
+export type AnimationID = string
+export type TileID = EntityType
+export type TileAndAnimationID = `${TileID}_${AnimationID}`
+
+export type TileData = {
+  textureMatch: string
+  pos?: number | Vector2
+  size?: number | Vector2
+  frames?: number
+  padding?: number
+}
+
+export type TileDataRecord = Record<AnimationID, TileData>
 
 /* LDTK entity data */
 export interface EntityData {

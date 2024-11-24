@@ -1,5 +1,5 @@
 import { textureInfos, type TextureInfo } from 'littlejsengine'
-import type { EntityData, EntityType, LevelData } from './model'
+import type { EntityData, LevelData } from './model'
 
 /**
  * Get level data for given id.
@@ -45,13 +45,13 @@ export function flipEntityYAxis(levelHeight: number) {
 /**
  * Get the texture index for the given url.
  */
-export function getTextureIndex(imageURL: URL): number {
-  const index = textureInfos.findIndex(
-    (t: TextureInfo) => t.image.src === imageURL.href,
+export function getTextureIndex(match: string): number {
+  const index = textureInfos.findIndex((t: TextureInfo) =>
+    t.image.src.includes(match),
   )
 
   if (index < 0) {
-    throw Error(`Texture not found for url: ${imageURL.href}`)
+    throw Error(`Texture not found for: '${match}'`)
   }
 
   return index

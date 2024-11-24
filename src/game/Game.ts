@@ -1,4 +1,4 @@
-import { cameraPos, engineInit, setCameraPos, vec2 } from 'littlejsengine'
+import { engineInit, setCameraPos, tileSizeDefault, vec2 } from 'littlejsengine'
 import { Level } from './Level'
 import { fetchLevelData } from './util'
 import type { LevelData } from './model'
@@ -35,12 +35,12 @@ export class Game {
   private readonly _startLevelData: LevelData
 
   init = () => {
-    // setCameraPos(
-    //   vec2(
-    //     this._startLevelData.width / 16,
-    //     this._startLevelData.height / 16,
-    //   ).scale(0.5),
-    // )
+    setCameraPos(
+      vec2(
+        this._startLevelData.width / tileSizeDefault.x,
+        this._startLevelData.height / tileSizeDefault.y,
+      ).scale(0.5),
+    )
     new Level(this._startLevelData)
   }
 

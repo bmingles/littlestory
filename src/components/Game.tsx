@@ -6,7 +6,7 @@ export function Game() {
   let rootRef!: HTMLDivElement
 
   createEffect(async () => {
-    await GameObject.start('level-0', rootRef)
+    await GameObject.start('level-0')
   })
 
   return (

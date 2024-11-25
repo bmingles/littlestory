@@ -1,4 +1,11 @@
-import { engineInit, setCameraPos, tileSizeDefault, vec2 } from 'littlejsengine'
+import {
+  engineInit,
+  setCameraPos,
+  setObjectDefaultDamping,
+  setObjectDefaultFriction,
+  tileSizeDefault,
+  vec2,
+} from 'littlejsengine'
 import { Level } from './Level'
 import { createCharacterSpriteData, fetchLevelData } from './util'
 import type { LevelData } from './model'
@@ -15,7 +22,7 @@ export class Game {
         idle: createCharacterSpriteData({
           size: 128,
           textureMatch: 'hero-walk', // TODO: idle
-          frames: [2, 2, 2, 2, 4, 4, 4, 4],
+          frames: 1, // [2, 2, 2, 2, 4, 4, 4, 4],
         }),
         walk: createCharacterSpriteData({
           size: 128,
@@ -57,6 +64,9 @@ export class Game {
   private readonly _startLevelData: LevelData
 
   init = () => {
+    setObjectDefaultDamping(0.7)
+    setObjectDefaultFriction(0)
+
     setCameraPos(
       vec2(
         this._startLevelData.width / tileSizeDefault.x,

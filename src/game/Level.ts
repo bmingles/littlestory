@@ -2,7 +2,7 @@ import { EngineObject, tile, tileSizeDefault, vec2 } from 'littlejsengine'
 import type { LevelData } from './model'
 import { Entity } from './Entity'
 import { getTextureIndex } from './util'
-import { Character } from './Character'
+import { Player } from './Player'
 
 export class Level extends EngineObject {
   constructor({ x, y, width, height, entities, imageUrl }: LevelData) {
@@ -14,7 +14,7 @@ export class Level extends EngineObject {
 
     for (const entity of Object.values(entities).flat()) {
       if (entity.id === 'player') {
-        new Character(entity, 'idle')
+        new Player(entity, 'idle')
       } else {
         new Entity(entity)
       }

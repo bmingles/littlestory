@@ -83,15 +83,10 @@ export function getDirectionFromVelocity(
     return currentDirection
   }
 
-  const a = velocity.y < 0 ? 'S' : 'N'
+  const a = velocity.y === 0 ? '' : velocity.y < 0 ? 'S' : 'N'
+  const b = velocity.x === 0 ? '' : velocity.x < 0 ? 'W' : 'E'
 
-  if (velocity.x === 0) {
-    return a
-  }
-
-  const b = velocity.x < 0 ? 'W' : 'E'
-
-  return `${a}${b}`
+  return `${a}${b}` as Direction
 }
 
 /**

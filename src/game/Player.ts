@@ -6,7 +6,11 @@ export class Player extends Character {
     this.moveInput = vec2(
       Number(keyIsDown('ArrowRight')) - Number(keyIsDown('ArrowLeft')),
       Number(keyIsDown('ArrowUp')) - Number(keyIsDown('ArrowDown')),
-    ) //.normalize()
+    )
+
+    if (this.moveInput.length() !== 0) {
+      this.moveInput = this.moveInput.normalize()
+    }
 
     super.update()
 

@@ -2,30 +2,32 @@ import { abs, clamp, vec2, type Vector2 } from 'littlejsengine'
 import { Entity } from './Entity'
 import { getDirectionFromVelocity } from './util'
 
-const MAX_CHARACTER_SPEED = 0.2
+const MIN_CHARACTER_VELOCITY = 0.005
+const MAX_CHARACTER_VELOCITY = 0.12
 
 export class Character extends Entity {
   moveInput: Vector2 = vec2()
   velocity: Vector2 = vec2()
+  speed = 0.02
 
   update() {
     super.update()
 
     this.velocity.x = clamp(
-      this.velocity.x + this.moveInput.x * 0.022,
-      -MAX_CHARACTER_SPEED,
-      MAX_CHARACTER_SPEED,
+      this.velocity.x + this.moveInput.x * this.speed,
+      -MAX_CHARACTER_VELOCITY,
+      MAX_CHARACTER_VELOCITY,
     )
-    if (abs(this.velocity.x) < 0.02) {
+    if (abs(this.velocity.x) < MIN_CHARACTER_VELOCITY) {
       this.velocity.x = 0
     }
 
     this.velocity.y = clamp(
-      this.velocity.y + this.moveInput.y * 0.022,
-      -MAX_CHARACTER_SPEED,
-      MAX_CHARACTER_SPEED,
+      this.velocity.y + this.moveInput.y * this.speed,
+      -MAX_CHARACTER_VELOCITY,
+      MAX_CHARACTER_VELOCITY,
     )
-    if (abs(this.velocity.y) < 0.02) {
+    if (abs(this.velocity.y) < MIN_CHARACTER_VELOCITY) {
       this.velocity.y = 0
     }
 

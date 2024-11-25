@@ -1,5 +1,35 @@
-import { textureInfos, type TextureInfo } from 'littlejsengine'
-import type { EntityData, LevelData } from './model'
+import {
+  textureInfos,
+  vec2,
+  type TextureInfo,
+  type Vector2,
+} from 'littlejsengine'
+import type {
+  Direction,
+  EntityData,
+  LevelData,
+  SpriteAnimation,
+  SpriteData,
+} from './model'
+
+/**
+ * Create 8 direction animation SpriteData.
+ */
+export function createCharacterSpriteData(
+  animationTemplate: Omit<SpriteAnimation, 'pos'>,
+): SpriteData {
+  let y = 0
+  return {
+    S: { ...animationTemplate, pos: vec2(0, y++) },
+    SW: { ...animationTemplate, pos: vec2(0, y++) },
+    W: { ...animationTemplate, pos: vec2(0, y++) },
+    NW: { ...animationTemplate, pos: vec2(0, y++) },
+    N: { ...animationTemplate, pos: vec2(0, y++) },
+    NE: { ...animationTemplate, pos: vec2(0, y++) },
+    E: { ...animationTemplate, pos: vec2(0, y++) },
+    SE: { ...animationTemplate, pos: vec2(0, y++) },
+  }
+}
 
 /**
  * Get level data for given id.
@@ -40,6 +70,28 @@ export function flipEntityYAxis(levelHeight: number) {
   return (entity: EntityData): EntityData => {
     return { ...entity, y: levelHeight - entity.y }
   }
+}
+
+/**
+ * Determine direction from velocity.
+ */
+export function getDirectionFromVelocity(
+  velocity: Vector2,
+  currentDirection: Direction,
+): Direction {
+  if (velocity.length() === 0) {
+    return currentDirection
+  }
+
+  const a = velocity.y < 0 ? 'S' : 'N'
+
+  if (velocity.x === 0) {
+    return a
+  }
+
+  const b = velocity.x < 0 ? 'W' : 'E'
+
+  return `${a}${b}`
 }
 
 /**

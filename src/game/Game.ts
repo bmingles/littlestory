@@ -1,6 +1,6 @@
 import { engineInit, setCameraPos, tileSizeDefault, vec2 } from 'littlejsengine'
 import { Level } from './Level'
-import { fetchLevelData } from './util'
+import { createCharacterSpriteData, fetchLevelData } from './util'
 import type { LevelData } from './model'
 import { Sprite } from './Sprite'
 
@@ -12,10 +12,21 @@ export class Game {
       gem: { idle: { S: { pos: 1719, textureMatch: 'tileset' } } },
       heart: { idle: { S: { pos: 3052, textureMatch: 'tileset' } } },
       player: {
-        idle: { S: { pos: 0, size: 128, textureMatch: 'hero-idle' } },
-        walk: {
-          S: { pos: 0, size: 128, textureMatch: 'hero-walk', frames: 8 },
-        },
+        idle: createCharacterSpriteData({
+          size: 128,
+          textureMatch: 'hero-walk', // TODO: idle
+          frames: [2, 2, 2, 2, 4, 4, 4, 4],
+        }),
+        walk: createCharacterSpriteData({
+          size: 128,
+          textureMatch: 'hero-walk',
+          frames: 8,
+        }),
+        run: createCharacterSpriteData({
+          size: 128,
+          textureMatch: 'hero-run',
+          frames: 8,
+        }),
       },
     })
 
@@ -32,6 +43,7 @@ export class Game {
       [
         '/tileset.png',
         '/animations/hero-walk.png',
+        '/animations/hero-run.png',
         startLevelData.imageUrl.href,
       ],
       rootEl,

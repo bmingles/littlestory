@@ -1,5 +1,5 @@
 import { EngineObject, mod, tileSizeDefault, vec2 } from 'littlejsengine'
-import type { AnimationID, EntityData } from './model'
+import type { AnimationID, Direction, EntityData } from './model'
 import { Sprite } from './Sprite'
 
 export class Entity extends EngineObject {
@@ -13,11 +13,13 @@ export class Entity extends EngineObject {
     )
     this.animation = animation
     this.animationFrame = 0
+    this.direction = 'S'
     this.entity = entity
   }
 
   animation: AnimationID
   animationFrame: number
+  direction: Direction
   entity: EntityData
 
   update() {
@@ -33,7 +35,7 @@ export class Entity extends EngineObject {
     this.tileInfo = Sprite.tileInfo(
       this.entity.id,
       this.animation,
-      'S',
+      this.direction,
       Math.floor(this.animationFrame),
     )
   }

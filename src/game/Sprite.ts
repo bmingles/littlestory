@@ -55,13 +55,13 @@ export class Sprite {
       this._tileInfoCache.set(cacheId, tile(pos, size, textureIndex, padding))
     }
 
-    const totalFrames =
+    const currentFrame =
       animation.frames == null
-        ? 1
+        ? 0
         : typeof animation.frames === 'number'
-        ? animation.frames
-        : animation.frames.length
+        ? mod(frame, animation.frames)
+        : animation.frames[mod(frame, animation.frames.length)]
 
-    return this._tileInfoCache.get(cacheId)!.frame(mod(frame, totalFrames))
+    return this._tileInfoCache.get(cacheId)!.frame(currentFrame)
   }
 }

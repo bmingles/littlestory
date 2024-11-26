@@ -14,7 +14,7 @@ export class Level extends EngineObject {
 
     for (const entity of Object.values(entities).flat()) {
       if (entity.id === 'player') {
-        new Player(entity, 'idle')
+        new Player(entity, 'idle').size = vec2(2)
       } else {
         new Entity(entity)
       }

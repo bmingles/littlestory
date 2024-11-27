@@ -14,25 +14,20 @@ export class Character extends Entity {
       : Settings.character.velocityWalkMax
   }
 
-  velocityScalar(axis: 'x' | 'y'): number {
-    const scalar = clamp(
-      this.velocity[axis] + this.moveInput[axis] * Settings.accelerationRate,
-      -this.maxVelocity,
-      this.maxVelocity,
-    )
-
-    if (abs(scalar) < Settings.character.velocityMin) {
-      return 0
-    }
-
-    return scalar
-  }
-
   update() {
     super.update()
 
-    this.velocity.x = this.velocityScalar('x')
-    this.velocity.y = this.velocityScalar('y')
+    // Note: If I ever support gamepad with non-binary inputs, `moveInput.clampLength()`
+    // probably won't work and may need to be `moveInput.length() ? moveInput.normalize() : moveInput`
+    const accel = this.moveInput.clampLength().scale(Settings.accelerationRate)
+    this.velocity = this.velocity.add(accel).clampLength(this.maxVelocity)
+
+    if (abs(this.velocity.x) < Settings.character.velocityMin) {
+      this.velocity.x = 0
+    }
+    if (abs(this.velocity.y) < Settings.character.velocityMin) {
+      this.velocity.y = 0
+    }
 
     this.direction = getDirectionFromVelocity(this.velocity, this.direction)
   }

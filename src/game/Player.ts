@@ -9,10 +9,6 @@ export class Player extends Character {
       Number(keyIsDown('ArrowUp')) - Number(keyIsDown('ArrowDown')),
     )
 
-    if (this.moveInput.length() !== 0) {
-      this.moveInput = this.moveInput.normalize()
-    }
-
     super.update()
 
     if (this.velocity.length() === 0) {

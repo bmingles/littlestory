@@ -25,7 +25,7 @@ export class Entity extends EngineObject {
   update() {
     super.update()
 
-    const speed = 0.2
+    const speed = 0.3
     this.animationFrame = this.animationFrame + speed
   }
 

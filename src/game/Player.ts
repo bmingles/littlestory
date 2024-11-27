@@ -3,6 +3,7 @@ import { Character } from './Character'
 
 export class Player extends Character {
   update() {
+    this.isRunning = keyIsDown('ShiftLeft')
     this.moveInput = vec2(
       Number(keyIsDown('ArrowRight')) - Number(keyIsDown('ArrowLeft')),
       Number(keyIsDown('ArrowUp')) - Number(keyIsDown('ArrowDown')),
@@ -16,6 +17,8 @@ export class Player extends Character {
 
     if (this.velocity.length() === 0) {
       this.animation = 'idle'
+    } else if (this.isRunning) {
+      this.animation = 'run'
     } else {
       this.animation = 'walk'
     }

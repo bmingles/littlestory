@@ -10,6 +10,7 @@ import { Level } from './Level'
 import { createCharacterSpriteData, fetchLevelData } from './util'
 import type { LevelData } from './model'
 import { Sprite } from './Sprite'
+import { Settings } from './Settings'
 
 export class Game {
   static start = async (startLevelId: string, rootEl?: HTMLElement) => {
@@ -64,7 +65,7 @@ export class Game {
   private readonly _startLevelData: LevelData
 
   init = () => {
-    setObjectDefaultDamping(0.7)
+    setObjectDefaultDamping(Settings.accelerationRate)
     setObjectDefaultFriction(0)
 
     setCameraPos(

@@ -1,35 +1,38 @@
 import { abs, clamp, vec2, type Vector2 } from 'littlejsengine'
 import { Entity } from './Entity'
 import { getDirectionFromVelocity } from './util'
-
-const MIN_CHARACTER_VELOCITY = 0.005
-const MAX_CHARACTER_VELOCITY = 0.12
+import { Settings } from './Settings'
 
 export class Character extends Entity {
+  isRunning: boolean = false
   moveInput: Vector2 = vec2()
   velocity: Vector2 = vec2()
-  speed = 0.02
+
+  get maxVelocity() {
+    return this.isRunning
+      ? Settings.character.velocityRunMax
+      : Settings.character.velocityWalkMax
+  }
+
+  velocityScalar(axis: 'x' | 'y'): number {
+    const scalar = clamp(
+      this.velocity[axis] + this.moveInput[axis] * Settings.accelerationRate,
+      -this.maxVelocity,
+      this.maxVelocity,
+    )
+
+    if (abs(scalar) < Settings.character.velocityMin) {
+      return 0
+    }
+
+    return scalar
+  }
 
   update() {
     super.update()
 
-    this.velocity.x = clamp(
-      this.velocity.x + this.moveInput.x * this.speed,
-      -MAX_CHARACTER_VELOCITY,
-      MAX_CHARACTER_VELOCITY,
-    )
-    if (abs(this.velocity.x) < MIN_CHARACTER_VELOCITY) {
-      this.velocity.x = 0
-    }
-
-    this.velocity.y = clamp(
-      this.velocity.y + this.moveInput.y * this.speed,
-      -MAX_CHARACTER_VELOCITY,
-      MAX_CHARACTER_VELOCITY,
-    )
-    if (abs(this.velocity.y) < MIN_CHARACTER_VELOCITY) {
-      this.velocity.y = 0
-    }
+    this.velocity.x = this.velocityScalar('x')
+    this.velocity.y = this.velocityScalar('y')
 
     this.direction = getDirectionFromVelocity(this.velocity, this.direction)
   }

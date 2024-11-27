@@ -17,8 +17,6 @@ export class Character extends Entity {
   update() {
     super.update()
 
-    // Note: If I ever support gamepad with non-binary inputs, `moveInput.clampLength()`
-    // probably won't work and may need to be `moveInput.length() ? moveInput.normalize() : moveInput`
     const accel = this.moveInput.clampLength().scale(Settings.accelerationRate)
     this.velocity = this.velocity.add(accel).clampLength(this.maxVelocity)
 

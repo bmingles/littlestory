@@ -3,6 +3,7 @@ import type { LevelData } from './model'
 import { Entity } from './Entity'
 import { getTextureIndex } from './util'
 import { Player } from './Player'
+import { Scorpion } from './Scorpion'
 
 export class Level extends EngineObject {
   constructor({ x, y, width, height, entities, imageUrl }: LevelData) {
@@ -12,11 +13,24 @@ export class Level extends EngineObject {
       tile(vec2(x, y), vec2(width, height), getTextureIndex(imageUrl.pathname)),
     )
 
-    for (const entity of Object.values(entities).flat()) {
-      if (entity.id === 'player') {
-        new Player(entity, 'idle').size = vec2(2)
-      } else {
-        new Entity(entity)
+    const flatEntities = Object.values(entities).flat()
+
+    const playerData = flatEntities.find((e) => e.id === 'player')
+    if (playerData == null) {
+      throw new Error('No player data found in level.')
+    }
+
+    const player = new Player(playerData, 'idle')
+    player.size = vec2(2)
+
+    for (const entity of flatEntities.filter((e) => e.id !== 'player')) {
+      switch (entity.id) {
+        case 'scorpion':
+          new Scorpion(entity, player, 'walk').size = vec2(2)
+          break
+
+        default:
+          new Entity(entity)
       }
     }
   }

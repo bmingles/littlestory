@@ -36,6 +36,13 @@ export class Game {
           frames: 8,
         }),
       },
+      scorpion: {
+        walk: createCharacterSpriteData({
+          size: 128,
+          textureMatch: 'scorpion-walk',
+          frames: 8,
+        }),
+      },
     })
 
     const { init, update, updatePost, render, renderPost } = new Game(
@@ -52,6 +59,7 @@ export class Game {
         '/tileset.png',
         '/animations/hero-walk.png',
         '/animations/hero-run.png',
+        '/animations/scorpion-walk.png',
         startLevelData.imageUrl.href,
       ],
       rootEl,

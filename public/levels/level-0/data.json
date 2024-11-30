@@ -94,6 +94,19 @@
 				"color": 15389866,
 				"customFields" : {}
 			}
+		],
+		"scorpion": [
+			{
+				"id": "scorpion",
+				"iid": "73043800-9b00-11ef-b110-21adfd441070",
+				"layer": "entities",
+				"x": 192,
+				"y": 80,
+				"width": 16,
+				"height": 16,
+				"color": 14984818,
+				"customFields" : {}
+			}
 		]
 	}
 }

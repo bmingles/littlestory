@@ -1,7 +1,14 @@
 import { keyIsDown, vec2 } from 'littlejsengine'
 import { Character } from './Character'
+import { Settings } from './Settings'
 
 export class Player extends Character {
+  get maxVelocity(): number {
+    return this.isRunning
+      ? Settings.character.velocityRunMax
+      : Settings.character.velocityWalkMax
+  }
+
   update() {
     this.isRunning = keyIsDown('ShiftLeft')
     this.moveInput = vec2(

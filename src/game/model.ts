@@ -1,6 +1,6 @@
 import type { Vector2 } from 'littlejsengine'
 
-export type EntityType = 'gem' | 'heart' | 'player'
+export type EntityType = 'gem' | 'heart' | 'player' | 'scorpion'
 
 export type AnimationID = string
 export type Direction = 'S' | 'SW' | 'W' | 'NW' | 'N' | 'NE' | 'E' | 'SE'

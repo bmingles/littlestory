@@ -1,4 +1,6 @@
 import {
+  mod,
+  PI,
   textureInfos,
   vec2,
   type TextureInfo,
@@ -82,6 +84,10 @@ export function getDirectionFromVelocity(
   if (velocity.length() === 0) {
     return currentDirection
   }
+
+  // const i = Math.floor(mod((velocity.angle() * 4) / PI, 8))
+  // console.log(i)
+  // return (['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'] as const)[i]
 
   const a = velocity.y === 0 ? '' : velocity.y < 0 ? 'S' : 'N'
   const b = velocity.x === 0 ? '' : velocity.x < 0 ? 'W' : 'E'

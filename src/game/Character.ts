@@ -3,16 +3,12 @@ import { Entity } from './Entity'
 import { getDirectionFromVelocity } from './util'
 import { Settings } from './Settings'
 
-export class Character extends Entity {
+export abstract class Character extends Entity {
   isRunning: boolean = false
   moveInput: Vector2 = vec2()
   velocity: Vector2 = vec2()
 
-  get maxVelocity() {
-    return this.isRunning
-      ? Settings.character.velocityRunMax
-      : Settings.character.velocityWalkMax
-  }
+  abstract get maxVelocity(): number
 
   update() {
     super.update()

@@ -1,4 +1,4 @@
-import { abs, clamp, vec2, type Vector2 } from 'littlejsengine'
+import { abs, vec2, type Vector2 } from 'littlejsengine'
 import { Entity } from './Entity'
 import { getDirectionFromVelocity } from './util'
 import { Settings } from './Settings'

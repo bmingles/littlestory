@@ -5,16 +5,25 @@ import {
   type EngineObject,
   type Vector2,
 } from 'littlejsengine'
-import type { Direction, HasDirection, MovementController } from './model'
+import type {
+  Direction,
+  ICharacter,
+  IEntity,
+  IMovementController,
+} from './model'
 import { Settings } from './Settings'
 import { getDirection8, snapToDirection } from './util'
 
-export class PlayerMovementController implements MovementController {
-  constructor(player: EngineObject & HasDirection) {
+export class PlayerMovementController implements IMovementController {
+  constructor(player: ICharacter) {
     this.player = player
   }
 
-  player: EngineObject & HasDirection
+  player
+
+  nextAnimation(): string {
+    return this.player.animation
+  }
 
   nextDirection(): Direction {
     return getDirection8(this.player.velocity, this.player.direction, true)
@@ -45,23 +54,27 @@ export class PlayerMovementController implements MovementController {
   }
 }
 
-export class FollowTargetMovementController implements MovementController {
-  constructor(object: EngineObject & HasDirection, target: EngineObject) {
-    this.object = object
+export class FollowTargetMovementController implements IMovementController {
+  constructor(entity: IEntity, target: EngineObject) {
+    this.entity = entity
     this.target = target
   }
 
   maxVelocity = 0.05
   minTargetGap = 0.05
-  object: EngineObject & HasDirection
+  entity: IEntity
   target: EngineObject
 
+  nextAnimation(): string {
+    return this.entity.animation
+  }
+
   nextDirection(): Direction {
-    return getDirection8(this.object.velocity, this.object.direction)
+    return getDirection8(this.entity.velocity, this.entity.direction)
   }
 
   nextVelocity(): Vector2 {
-    const posDelta = this.target.pos.subtract(this.object.pos)
+    const posDelta = this.target.pos.subtract(this.entity.pos)
     const direction8 = snapToDirection(posDelta)
     const velocity = direction8.clampLength(this.maxVelocity)
 

@@ -7,8 +7,16 @@ export type Direction = 'S' | 'SW' | 'W' | 'NW' | 'N' | 'NE' | 'E' | 'SE'
 export type SpriteID = EntityType
 export type SpriteAnimationID = `${SpriteID}_${AnimationID}_${Direction}`
 
-export interface HasDirection {
+export interface IEntity extends EngineObject {
+  animation: AnimationID
+  animationFrame: number
   direction: Direction
+  entity: EntityData
+}
+
+export interface ICharacter extends IEntity {
+  isRunning: boolean
+  movementController?: IMovementController
 }
 
 export type TileData = {
@@ -59,7 +67,8 @@ export interface LevelData {
   imageUrl: URL
 }
 
-export interface MovementController {
+export interface IMovementController {
+  nextAnimation(): string
   nextDirection(): Direction
   nextVelocity(): Vector2
 }

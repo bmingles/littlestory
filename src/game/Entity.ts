@@ -1,8 +1,8 @@
 import { EngineObject, mod, tileSizeDefault, vec2 } from 'littlejsengine'
-import type { AnimationID, Direction, EntityData } from './model'
+import type { AnimationID, Direction, EntityData, IEntity } from './model'
 import { Sprite } from './Sprite'
 
-export class Entity extends EngineObject {
+export class Entity extends EngineObject implements IEntity {
   constructor(entity: EntityData, animation: AnimationID = 'idle') {
     super(
       vec2(

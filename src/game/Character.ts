@@ -1,9 +1,9 @@
 import { Entity } from './Entity'
-import type { MovementController } from './model'
+import type { ICharacter, IMovementController } from './model'
 
-export class Character extends Entity {
+export class Character extends Entity implements ICharacter {
   isRunning: boolean = false
-  movementController?: MovementController
+  movementController?: IMovementController
 
   update() {
     super.update()

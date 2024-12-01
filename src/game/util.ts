@@ -26,6 +26,17 @@ const DIRECTIONS_VECTOR_8 = [
   vec2(-1, 1),
 ] as const
 
+const DIRECTION_ANGLE = {
+  N: 0,
+  NE: PI / 4,
+  E: PI / 2,
+  SE: (3 * PI) / 4,
+  S: PI,
+  SW: (-3 * PI) / 4,
+  W: -PI / 2,
+  NW: -PI / 4,
+}
+
 export function absTuple({ x, y }: Vector2): [x: number, y: number] {
   return [Math.abs(x), Math.abs(y)]
 }
@@ -116,6 +127,13 @@ export function getAngleOctantIndex(vec2: Vector2): number {
 }
 
 /**
+ * Get the angle in radians corresponding to a given direction.
+ */
+export function getDirectionAngle(direction: Direction): number {
+  return DIRECTION_ANGLE[direction]
+}
+
+/**
  * Determine 1 of a 8 directions from vector.
  * @param vector Velocity to calculate direction from.
  * @param currentDirection Current direction will be returned if vector is zero.
@@ -135,7 +153,6 @@ export function getDirection8(
   if (diagonalIfNonZero) {
     const a = vector.y === 0 ? '' : vector.y < 0 ? 'S' : 'N'
     const b = vector.x === 0 ? '' : vector.x < 0 ? 'W' : 'E'
-
     return `${a}${b}` as Direction
   }
 

@@ -28,7 +28,7 @@ export class Level extends EngineObject {
     player.movementController = new PlayerMovementController(player)
     player.drawSize = vec2(2)
     player.drawOffset = vec2(0, 0.4)
-    player.size = vec2(1, 0.7)
+    player.size = vec2(0.8, 0.8)
 
     for (const entity of flatEntities.filter((e) => e.id !== 'player')) {
       switch (entity.id) {
@@ -38,7 +38,8 @@ export class Level extends EngineObject {
             scorpion,
             player,
           )
-          scorpion.size = vec2(2)
+          scorpion.drawSize = vec2(2)
+          scorpion.size = vec2(0.6, 1)
           break
 
         default:

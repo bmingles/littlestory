@@ -21,6 +21,7 @@ export class Entity extends EngineObject implements IEntity {
     this.animationFrame = 0
     this.direction = 'S'
     this.entity = entity
+    this.renderAngle = 0
   }
 
   animation: AnimationID
@@ -28,6 +29,7 @@ export class Entity extends EngineObject implements IEntity {
   direction: Direction
   entity: EntityData
   drawOffset?: Vector2
+  renderAngle?: number
 
   update() {
     super.update()
@@ -45,7 +47,7 @@ export class Entity extends EngineObject implements IEntity {
       this.drawSize || this.size,
       this.tileInfo,
       this.color,
-      this.angle,
+      this.renderAngle ?? this.angle,
       this.mirror,
       this.additiveColor,
     )

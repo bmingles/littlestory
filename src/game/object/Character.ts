@@ -5,6 +5,7 @@ import type {
   ICharacter,
   IMovementController,
 } from '../model'
+import { getDirectionAngle } from '../util'
 
 export class Character extends Entity implements ICharacter {
   constructor(entity: EntityData, animation?: AnimationID) {
@@ -14,6 +15,7 @@ export class Character extends Entity implements ICharacter {
 
   isRunning: boolean = false
   movementController?: IMovementController
+  orientCollisionBoxWithDirection: boolean = true
 
   update() {
     super.update()
@@ -21,6 +23,10 @@ export class Character extends Entity implements ICharacter {
     if (this.movementController) {
       this.velocity = this.movementController.nextVelocity()
       this.direction = this.movementController.nextDirection()
+
+      if (this.orientCollisionBoxWithDirection) {
+        this.angle = getDirectionAngle(this.direction)
+      }
     }
   }
 }

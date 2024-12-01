@@ -36,6 +36,8 @@ export class Entity extends EngineObject implements IEntity {
 
     const speed = 0.3
     this.animationFrame = this.animationFrame + speed
+
+    this.renderOrder = 1000 - this.pos.y
   }
 
   render() {

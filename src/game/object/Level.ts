@@ -39,7 +39,7 @@ export class Level extends EngineObject {
             player,
           )
           scorpion.drawSize = vec2(2)
-          scorpion.size = vec2(0.6, 1)
+          scorpion.size = vec2(0.6, 0.4)
           break
 
         default:

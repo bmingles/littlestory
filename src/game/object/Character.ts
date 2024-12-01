@@ -1,5 +1,5 @@
 import { Entity } from './Entity'
-import type { ICharacter, IMovementController } from './model'
+import type { ICharacter, IMovementController } from '../model'
 
 export class Character extends Entity implements ICharacter {
   isRunning: boolean = false

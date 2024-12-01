@@ -5,8 +5,8 @@ import type {
   SpriteAnimationID,
   SpriteID,
   Direction,
-} from './model'
-import { getTextureIndex } from './util'
+} from '../model'
+import { getTextureIndex } from '../util'
 
 export class Sprite {
   private constructor() {}

@@ -1,6 +1,6 @@
-import { EngineObject, mod, tileSizeDefault, vec2 } from 'littlejsengine'
-import type { AnimationID, Direction, EntityData, IEntity } from './model'
-import { Sprite } from './Sprite'
+import { EngineObject, tileSizeDefault, vec2 } from 'littlejsengine'
+import type { AnimationID, Direction, EntityData, IEntity } from '../model'
+import { Sprite } from '../global'
 
 export class Entity extends EngineObject implements IEntity {
   constructor(entity: EntityData, animation: AnimationID = 'idle') {

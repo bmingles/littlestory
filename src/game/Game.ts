@@ -9,8 +9,7 @@ import {
 import { Level } from './Level'
 import { createCharacterSpriteData, fetchLevelData } from './util'
 import type { LevelData } from './model'
-import { Sprite } from './Sprite'
-import { Settings } from './Settings'
+import { Settings, Sprite } from './global'
 
 export class Game {
   static start = async (startLevelId: string, rootEl?: HTMLElement) => {

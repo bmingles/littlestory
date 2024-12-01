@@ -1,8 +1,14 @@
 import {
+  drawTextScreen,
   engineInit,
+  keyWasPressed,
+  mainCanvasSize,
+  mouseWasPressed,
+  paused,
   setCameraPos,
   setObjectDefaultDamping,
   setObjectDefaultFriction,
+  setPaused,
   tileSizeDefault,
   vec2,
 } from 'littlejsengine'
@@ -81,16 +87,25 @@ export class Game {
         this._startLevelData.height / tileSizeDefault.y,
       ).scale(0.5),
     )
+
+    setPaused(true)
+
     new Level(this._startLevelData)
   }
 
   update = () => {}
 
-  updatePost = () => {}
+  updatePost = () => {
+    if (keyWasPressed('KeyP')) {
+      setPaused(!paused)
+    }
+  }
 
   render = () => {}
 
   renderPost = () => {
-    // drawTextScreen('Hello World!', mainCanvasSize.scale(0.5), 80)
+    if (paused) {
+      drawTextScreen('Paused', mainCanvasSize.scale(0.5), 80)
+    }
   }
 }

@@ -6,7 +6,7 @@ import {
   tileSizeDefault,
   vec2,
 } from 'littlejsengine'
-import { Level } from './Level'
+import { Level } from './object'
 import { createCharacterSpriteData, fetchLevelData } from './util'
 import type { LevelData } from './model'
 import { Settings, Sprite } from './global'

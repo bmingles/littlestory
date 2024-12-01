@@ -1,11 +1,13 @@
 import { EngineObject, tile, tileSizeDefault, vec2 } from 'littlejsengine'
-import type { LevelData } from './model'
-import { Character, Entity, Player } from './object'
-import { getTextureIndex } from './util'
+import type { LevelData } from '../model'
+import { Character } from './Character'
+import { Entity } from './Entity'
+import { Player } from './Player'
+import { getTextureIndex } from '../util'
 import {
   FollowTargetMovementController,
   PlayerMovementController,
-} from './controller'
+} from '../controller'
 
 export class Level extends EngineObject {
   constructor({ x, y, width, height, entities, imageUrl }: LevelData) {

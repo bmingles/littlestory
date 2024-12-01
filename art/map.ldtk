@@ -551,6 +551,22 @@
 							"fieldInstances": [],
 							"__worldX": 192,
 							"__worldY": 80
+						},
+						{
+							"__identifier": "scorpion",
+							"__grid": [3,1],
+							"__pivot": [0,0],
+							"__tags": [],
+							"__tile": { "tilesetUid": 10, "x": 128, "y": 0, "w": 128, "h": 128 },
+							"__smartColor": "#E4A672",
+							"iid": "45169a90-9b00-11ef-b508-737241c3c76b",
+							"width": 16,
+							"height": 16,
+							"defUid": 9,
+							"px": [48,16],
+							"fieldInstances": [],
+							"__worldX": 48,
+							"__worldY": 16
 						}
 					]
 				},

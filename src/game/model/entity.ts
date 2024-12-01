@@ -1,4 +1,4 @@
-import type { EngineObject } from 'littlejsengine'
+import type { EngineObject, Vector2 } from 'littlejsengine'
 import type { AnimationID, Direction } from './sprite'
 import type { EntityData } from './level'
 import type { IMovementController } from './controller'
@@ -9,6 +9,7 @@ export interface IEntity extends EngineObject {
   animation: AnimationID
   animationFrame: number
   direction: Direction
+  drawOffset?: Vector2
   entity: EntityData
 }
 

@@ -1,4 +1,10 @@
-import { EngineObject, tileSizeDefault, vec2 } from 'littlejsengine'
+import {
+  drawTile,
+  EngineObject,
+  tileSizeDefault,
+  vec2,
+  type Vector2,
+} from 'littlejsengine'
 import type { AnimationID, Direction, EntityData, IEntity } from '../model'
 import { Sprite } from '../global'
 
@@ -21,6 +27,7 @@ export class Entity extends EngineObject implements IEntity {
   animationFrame: number
   direction: Direction
   entity: EntityData
+  drawOffset?: Vector2
 
   update() {
     super.update()
@@ -30,7 +37,18 @@ export class Entity extends EngineObject implements IEntity {
   }
 
   render() {
-    super.render()
+    const drawPos = this.drawOffset ? this.pos.add(this.drawOffset) : this.pos
+
+    // Copy / modified drawTile call from base EngineObject render implementation.
+    drawTile(
+      drawPos,
+      this.drawSize || this.size,
+      this.tileInfo,
+      this.color,
+      this.angle,
+      this.mirror,
+      this.additiveColor,
+    )
 
     this.tileInfo = Sprite.tileInfo(
       this.entity.id,

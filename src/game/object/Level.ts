@@ -26,7 +26,9 @@ export class Level extends EngineObject {
 
     const player = new Player(playerData, 'idle')
     player.movementController = new PlayerMovementController(player)
-    player.size = vec2(2)
+    player.drawSize = vec2(2)
+    player.drawOffset = vec2(0, 0.4)
+    player.size = vec2(1, 0.7)
 
     for (const entity of flatEntities.filter((e) => e.id !== 'player')) {
       switch (entity.id) {

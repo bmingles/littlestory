@@ -1,4 +1,4 @@
-import type { Vector2 } from 'littlejsengine'
+import type { EngineObject, Vector2 } from 'littlejsengine'
 
 export type EntityType = 'gem' | 'heart' | 'player' | 'scorpion'
 
@@ -6,6 +6,10 @@ export type AnimationID = string
 export type Direction = 'S' | 'SW' | 'W' | 'NW' | 'N' | 'NE' | 'E' | 'SE'
 export type SpriteID = EntityType
 export type SpriteAnimationID = `${SpriteID}_${AnimationID}_${Direction}`
+
+export interface HasDirection {
+  direction: Direction
+}
 
 export type TileData = {
   textureMatch: string
@@ -53,4 +57,9 @@ export interface LevelData {
   layers: string[]
   entities: Record<string, EntityData[]>
   imageUrl: URL
+}
+
+export interface MovementController {
+  nextDirection(): Direction
+  nextVelocity(): Vector2
 }

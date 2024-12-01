@@ -14,6 +14,39 @@ import type {
   SpriteData,
 } from './model'
 
+const DIRECTIONS_8 = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'] as const
+const DIRECTIONS_VECTOR_8 = [
+  vec2(0, 1),
+  vec2(1, 1),
+  vec2(1, 0),
+  vec2(1, -1),
+  vec2(0, -1),
+  vec2(-1, -1),
+  vec2(-1, 1),
+  vec2(-1, 1),
+] as const
+
+export function absTuple({ x, y }: Vector2): [x: number, y: number] {
+  return [Math.abs(x), Math.abs(y)]
+}
+
+export function clampVector(vector: Vector2, max: Vector2): Vector2 {
+  const [avx, avy] = absTuple(vector)
+  const [amx, amy] = absTuple(max)
+  if (avx <= amx && avy <= amy) {
+    return vector
+  }
+
+  const diff = max.subtract(vector)
+  const [adx, ady] = absTuple(diff)
+
+  if (adx > ady) {
+    return vector.scale(diff.y / vector.y)
+  }
+
+  return vector.scale(diff.x / vector.x)
+}
+
 /**
  * Create 8 direction animation SpriteData.
  */
@@ -75,24 +108,39 @@ export function flipEntityYAxis(levelHeight: number) {
 }
 
 /**
- * Determine direction from velocity.
+ * Assuming a circle is broken into 8 pieces, get the octant index for a given
+ * vector.
  */
-export function getDirectionFromVelocity(
-  velocity: Vector2,
+export function getAngleOctantIndex(vec2: Vector2): number {
+  return Math.floor(mod((vec2.angle() * 4) / PI, 8))
+}
+
+/**
+ * Determine 1 of a 8 directions from vector.
+ * @param vector Velocity to calculate direction from.
+ * @param currentDirection Current direction will be returned if vector is zero.
+ * @param diagonalIfNonZero If true, N, S, E, and W will only be returned if vector
+ * is exactly the direction, and diagonal directions get more weight. If false
+ * (the default), all directions get equal weight.
+ */
+export function getDirection8(
+  vector: Vector2,
   currentDirection: Direction,
+  diagonalIfNonZero = false,
 ): Direction {
-  if (velocity.length() === 0) {
+  if (vector.length() === 0) {
     return currentDirection
   }
 
-  // const i = Math.floor(mod((velocity.angle() * 4) / PI, 8))
-  // console.log(i)
-  // return (['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'] as const)[i]
+  if (diagonalIfNonZero) {
+    const a = vector.y === 0 ? '' : vector.y < 0 ? 'S' : 'N'
+    const b = vector.x === 0 ? '' : vector.x < 0 ? 'W' : 'E'
 
-  const a = velocity.y === 0 ? '' : velocity.y < 0 ? 'S' : 'N'
-  const b = velocity.x === 0 ? '' : velocity.x < 0 ? 'W' : 'E'
+    return `${a}${b}` as Direction
+  }
 
-  return `${a}${b}` as Direction
+  const i = getAngleOctantIndex(vector)
+  return DIRECTIONS_8[i]
 }
 
 /**
@@ -108,4 +156,12 @@ export function getTextureIndex(match: string): number {
   }
 
   return index
+}
+
+/**
+ * Adjust vector to closest direction vector.
+ */
+export function snapToDirection(vector: Vector2): Vector2 {
+  const i = getAngleOctantIndex(vector)
+  return DIRECTIONS_VECTOR_8[i].copy()
 }

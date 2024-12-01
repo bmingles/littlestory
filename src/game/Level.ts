@@ -3,7 +3,11 @@ import type { LevelData } from './model'
 import { Entity } from './Entity'
 import { getTextureIndex } from './util'
 import { Player } from './Player'
-import { Scorpion } from './Scorpion'
+import {
+  FollowTargetMovementController,
+  PlayerMovementController,
+} from './MovementController'
+import { Character } from './Character'
 
 export class Level extends EngineObject {
   constructor({ x, y, width, height, entities, imageUrl }: LevelData) {
@@ -21,12 +25,18 @@ export class Level extends EngineObject {
     }
 
     const player = new Player(playerData, 'idle')
+    player.movementController = new PlayerMovementController(player)
     player.size = vec2(2)
 
     for (const entity of flatEntities.filter((e) => e.id !== 'player')) {
       switch (entity.id) {
         case 'scorpion':
-          new Scorpion(entity, player, 'walk').size = vec2(2)
+          const scorpion = new Character(entity, 'walk')
+          scorpion.movementController = new FollowTargetMovementController(
+            scorpion,
+            player,
+          )
+          scorpion.size = vec2(2)
           break
 
         default:

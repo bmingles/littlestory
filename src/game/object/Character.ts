@@ -1,3 +1,4 @@
+import { vec2 } from 'littlejsengine'
 import { Entity } from './Entity'
 import type {
   AnimationID,
@@ -23,6 +24,7 @@ export class Character extends Entity implements ICharacter {
     if (this.movementController) {
       this.velocity = this.movementController.nextVelocity()
       this.direction = this.movementController.nextDirection()
+      this.animation = this.movementController.nextAnimation()
 
       if (this.orientCollisionBoxWithDirection) {
         this.angle = getDirectionAngle(this.direction)

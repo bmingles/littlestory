@@ -40,6 +40,11 @@ export class Game {
           textureMatch: 'hero-run',
           frames: 8,
         }),
+        attack: createCharacterSpriteData({
+          size: 128,
+          textureMatch: 'hero-attack-sword',
+          frames: 8,
+        }),
       },
       scorpion: {
         walk: createCharacterSpriteData({
@@ -64,6 +69,7 @@ export class Game {
         '/tileset.png',
         '/animations/hero-walk.png',
         '/animations/hero-run.png',
+        '/animations/hero-attack-sword.png',
         '/animations/scorpion-walk.png',
         startLevelData.imageUrl.href,
       ],

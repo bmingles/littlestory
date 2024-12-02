@@ -11,7 +11,21 @@ export class PlayerMovementController implements IMovementController {
   player
 
   nextAnimation(): string {
-    return this.player.animation
+    const isAttacking = keyIsDown('Space')
+    if (isAttacking) {
+      return 'attack'
+    }
+
+    if (this.player.velocity.length() === 0) {
+      return 'idle'
+    }
+
+    const isRunning = keyIsDown('ShiftLeft')
+    if (isRunning) {
+      return 'run'
+    }
+
+    return 'walk'
   }
 
   nextDirection(): Direction {

@@ -26,7 +26,7 @@ export class Level extends EngineObject {
 
     const player = new Player(playerData, 'idle')
     player.movementController = new PlayerMovementController(player)
-    player.drawSize = vec2(2)
+    player.drawSize = vec2(2.5)
     player.drawOffset = vec2(0, 0.4)
     player.size = vec2(0.8, 0.8)
 
@@ -38,7 +38,7 @@ export class Level extends EngineObject {
             scorpion,
             player,
           )
-          scorpion.drawSize = vec2(2)
+          scorpion.drawSize = vec2(2.5)
           scorpion.size = vec2(0.6, 0.4)
           break
 

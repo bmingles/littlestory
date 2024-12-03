@@ -42,7 +42,7 @@ export class Game {
         }),
         attack: createCharacterSpriteData({
           size: 128,
-          textureMatch: 'hero-attack-sword',
+          textureMatch: 'hero-attack-sword2',
           frames: 8,
         }),
       },
@@ -69,7 +69,7 @@ export class Game {
         '/tileset.png',
         '/animations/hero-walk.png',
         '/animations/hero-run.png',
-        '/animations/hero-attack-sword.png',
+        '/animations/hero-attack-sword2.png',
         '/animations/scorpion-walk.png',
         startLevelData.imageUrl.href,
       ],

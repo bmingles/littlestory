@@ -13,6 +13,8 @@ export class FollowTargetMovementController implements IMovementController {
   entity: IEntity
   target: EngineObject
 
+  update(): void {}
+
   nextAnimation(): string {
     return this.entity.animation
   }

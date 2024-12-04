@@ -14,6 +14,5 @@ export interface IEntity extends EngineObject {
 }
 
 export interface ICharacter extends IEntity {
-  isRunning: boolean
   movementController?: IMovementController
 }

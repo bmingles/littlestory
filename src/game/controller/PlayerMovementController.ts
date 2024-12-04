@@ -8,11 +8,17 @@ export class PlayerMovementController implements IMovementController {
     this.player = player
   }
 
+  isAttacking: boolean = false
+  isRunning: boolean = false
   player
 
+  update(): void {
+    this.isAttacking = keyIsDown('Space')
+    this.isRunning = keyIsDown('ShiftLeft')
+  }
+
   nextAnimation(): string {
-    const isAttacking = keyIsDown('Space')
-    if (isAttacking) {
+    if (this.isAttacking) {
       return 'attack'
     }
 
@@ -20,8 +26,7 @@ export class PlayerMovementController implements IMovementController {
       return 'idle'
     }
 
-    const isRunning = keyIsDown('ShiftLeft')
-    if (isRunning) {
+    if (this.isRunning) {
       return 'run'
     }
 
@@ -33,13 +38,12 @@ export class PlayerMovementController implements IMovementController {
   }
 
   nextVelocity(): Vector2 {
-    const isRunning = keyIsDown('ShiftLeft')
     const moveInput = vec2(
       Number(keyIsDown('ArrowRight')) - Number(keyIsDown('ArrowLeft')),
       Number(keyIsDown('ArrowUp')) - Number(keyIsDown('ArrowDown')),
     )
 
-    const maxVelocity = isRunning
+    const maxVelocity = this.isRunning
       ? Settings.character.velocityRunMax
       : Settings.character.velocityWalkMax
 

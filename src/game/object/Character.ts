@@ -14,7 +14,6 @@ export class Character extends Entity implements ICharacter {
     this.setCollision(true, true)
   }
 
-  isRunning: boolean = false
   movementController?: IMovementController
   orientCollisionBoxWithDirection: boolean = true
 
@@ -22,6 +21,8 @@ export class Character extends Entity implements ICharacter {
     super.update()
 
     if (this.movementController) {
+      this.movementController.update()
+
       this.velocity = this.movementController.nextVelocity()
       this.direction = this.movementController.nextDirection()
       this.animation = this.movementController.nextAnimation()

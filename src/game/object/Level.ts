@@ -8,6 +8,7 @@ import {
   FollowTargetMovementController,
   PlayerMovementController,
 } from '../controller'
+import { Enemy } from './Enemy'
 
 export class Level extends EngineObject {
   constructor({ x, y, width, height, entities, imageUrl }: LevelData) {
@@ -33,7 +34,7 @@ export class Level extends EngineObject {
     for (const entity of flatEntities.filter((e) => e.id !== 'player')) {
       switch (entity.id) {
         case 'scorpion':
-          const scorpion = new Character(entity, 'walk')
+          const scorpion = new Enemy(entity, 'walk')
           scorpion.movementController = new FollowTargetMovementController(
             scorpion,
             player,
@@ -43,7 +44,7 @@ export class Level extends EngineObject {
           break
 
         default:
-          new Entity(entity)
+          new Entity('entity', entity)
       }
     }
   }

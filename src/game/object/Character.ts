@@ -1,4 +1,3 @@
-import { vec2 } from 'littlejsengine'
 import { Entity } from './Entity'
 import type {
   AnimationID,
@@ -7,15 +6,24 @@ import type {
   IMovementController,
 } from '../model'
 import { getDirectionAngle } from '../util'
+import type { Vector2 } from 'littlejsengine'
 
 export class Character extends Entity implements ICharacter {
-  constructor(entity: EntityData, animation?: AnimationID) {
-    super(entity, animation)
+  constructor(type: string, entity: EntityData, animation?: AnimationID) {
+    super(type, entity, animation)
     this.setCollision(true, true)
   }
 
   movementController?: IMovementController
   orientCollisionBoxWithDirection: boolean = true
+
+  takeDamage(force?: Vector2): void {
+    if (force == null) {
+      return
+    }
+
+    this.applyForce(force)
+  }
 
   update() {
     super.update()

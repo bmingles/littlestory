@@ -1,14 +1,18 @@
 import {
+  isOverlapping,
   mod,
   PI,
   textureInfos,
   vec2,
+  type EngineObject,
   type TextureInfo,
   type Vector2,
 } from 'littlejsengine'
 import type {
   Direction,
   EntityData,
+  IEnemy,
+  IEntity,
   LevelData,
   SpriteAnimation,
   SpriteData,
@@ -114,7 +118,7 @@ export function flipEntityYAxis(levelHeight: number) {
    * Flip the y position based on level height.
    */
   return (entity: EntityData): EntityData => {
-    return { ...entity, y: levelHeight - entity.y }
+    return { ...entity, y: levelHeight - (entity.y ?? 0) }
   }
 }
 
@@ -173,6 +177,22 @@ export function getTextureIndex(match: string): number {
   }
 
   return index
+}
+
+/**
+ * Return true if 2 objects are colliding.
+ */
+export function isColliding(a: EngineObject, b: EngineObject) {
+  return isOverlapping(a.pos, a.size, b.pos, b.size)
+}
+
+/**
+ * Determine if given EngineObject is an enemy.
+ */
+export function isEnemy(
+  engineObject: EngineObject | IEntity,
+): engineObject is IEnemy {
+  return 'entity' in engineObject && engineObject.entity.id === 'scorpion'
 }
 
 /**

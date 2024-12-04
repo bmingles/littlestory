@@ -2,15 +2,15 @@ import type { EntityType } from './entity'
 
 /* LDTK entity data */
 export interface EntityData {
-  id: EntityType
-  iid: string
-  layer: string
+  id?: EntityType
+  iid?: string
+  layer?: string
   x: number
   y: number
-  width: number
-  height: number
-  color: number
-  customFields: {}
+  width?: number
+  height?: number
+  color?: number
+  customFields?: {}
 }
 
 /* LDTK level data */

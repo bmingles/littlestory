@@ -8,6 +8,8 @@ export class FollowTargetMovementController implements IMovementController {
     this.target = target
   }
 
+  isAttacking = false
+  isRunning = false
   maxVelocity = 0.05
   minTargetGap = 0.05
   entity: IEntity

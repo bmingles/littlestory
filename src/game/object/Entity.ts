@@ -9,7 +9,11 @@ import type { AnimationID, Direction, EntityData, IEntity } from '../model'
 import { Sprite } from '../global'
 
 export class Entity extends EngineObject implements IEntity {
-  constructor(entity: EntityData, animation: AnimationID = 'idle') {
+  constructor(
+    type: string,
+    entity: EntityData = { x: 0, y: 0 },
+    animation: AnimationID = 'idle',
+  ) {
     super(
       vec2(
         entity.x / tileSizeDefault.x + 0.5,
@@ -17,6 +21,7 @@ export class Entity extends EngineObject implements IEntity {
       ),
       vec2(1),
     )
+    this.type = type
     this.animation = animation
     this.animationFrame = 0
     this.direction = 'S'
@@ -24,6 +29,7 @@ export class Entity extends EngineObject implements IEntity {
     this.renderAngle = 0
   }
 
+  type: string
   animation: AnimationID
   animationFrame: number
   direction: Direction
@@ -54,11 +60,13 @@ export class Entity extends EngineObject implements IEntity {
       this.additiveColor,
     )
 
-    this.tileInfo = Sprite.tileInfo(
-      this.entity.id,
-      this.animation,
-      this.direction,
-      Math.floor(this.animationFrame),
-    )
+    if (this.entity.id) {
+      this.tileInfo = Sprite.tileInfo(
+        this.entity.id,
+        this.animation,
+        this.direction,
+        Math.floor(this.animationFrame),
+      )
+    }
   }
 }

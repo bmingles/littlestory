@@ -6,14 +6,30 @@ import type {
   IMovementController,
 } from '../model'
 import { getDirectionAngle } from '../util'
-import type { Vector2 } from 'littlejsengine'
+import { Color, type Vector2 } from 'littlejsengine'
+import { Healthbar } from './Healthbar'
 
 export class Character extends Entity implements ICharacter {
-  constructor(type: string, entity: EntityData, animation?: AnimationID) {
+  constructor(
+    type: string,
+    entity: EntityData,
+    animation?: AnimationID,
+    healthBarColor?: Color,
+  ) {
     super(type, entity, animation)
     this.setCollision(true, true)
+
+    this.life = 1
+
+    this.healthBar = new Healthbar()
+    if (healthBarColor) {
+      this.healthBar.color = healthBarColor
+    }
+    this.addChild(this.healthBar)
   }
 
+  healthBar: Healthbar
+  life: number
   movementController?: IMovementController
   orientCollisionBoxWithDirection: boolean = true
 
@@ -22,7 +38,14 @@ export class Character extends Entity implements ICharacter {
       return
     }
 
+    this.life = Math.max(0, this.life - 0.21)
+    this.healthBar.value = this.life
+
     this.applyForce(force)
+
+    if (this.life === 0) {
+      this.destroy()
+    }
   }
 
   update() {

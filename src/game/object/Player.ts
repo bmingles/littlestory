@@ -1,4 +1,4 @@
-import { vec2 } from 'littlejsengine'
+import { Color, vec2 } from 'littlejsengine'
 import { Character } from './Character'
 import type { AnimationID, EntityData, IPlayer, IWeapon } from '../model'
 
@@ -6,7 +6,7 @@ import { Weapon } from './Weapon'
 
 export class Player extends Character implements IPlayer {
   constructor(entity: EntityData, animation?: AnimationID) {
-    super('player', entity, animation)
+    super('player', entity, animation, new Color().setHex('#0f0'))
 
     this.weapon = new Weapon('weapon')
     this.addChild(this.weapon)

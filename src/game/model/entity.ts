@@ -14,6 +14,7 @@ export interface IEntity extends EngineObject {
 }
 
 export interface ICharacter extends IEntity {
+  life: number
   movementController?: IMovementController
   takeDamage(force?: Vector2): void
 }

@@ -13,6 +13,7 @@ import type {
   EntityData,
   IEnemy,
   IEntity,
+  IPlayer,
   LevelData,
   SpriteAnimation,
   SpriteData,
@@ -193,6 +194,15 @@ export function isEnemy(
   engineObject: EngineObject | IEntity,
 ): engineObject is IEnemy {
   return 'entity' in engineObject && engineObject.entity.id === 'scorpion'
+}
+
+/**
+ * Determine if given EngineObject is a player.
+ */
+export function isPlayer(
+  engineObject: EngineObject | IEntity,
+): engineObject is IPlayer {
+  return 'entity' in engineObject && engineObject.entity.id === 'player'
 }
 
 /**

@@ -92,7 +92,10 @@
 				"width": 16,
 				"height": 16,
 				"color": 15389866,
-				"customFields" : {}
+				"customFields": {
+					"attack": 1,
+					"defense": 5
+				}
 			}
 		],
 		"scorpion": [
@@ -105,7 +108,10 @@
 				"width": 16,
 				"height": 16,
 				"color": 14984818,
-				"customFields" : {}
+				"customFields": {
+					"attack": 1,
+					"defense": 2
+				}
 			},
 			{
 				"id": "scorpion",
@@ -116,7 +122,10 @@
 				"width": 16,
 				"height": 16,
 				"color": 14984818,
-				"customFields" : {}
+				"customFields": {
+					"attack": 1,
+					"defense": 2
+				}
 			}
 		]
 	}

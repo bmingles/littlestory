@@ -184,7 +184,7 @@ export function getTextureIndex(match: string): number {
  * Return true if 2 objects are colliding.
  */
 export function isColliding(a: EngineObject, b: EngineObject) {
-  return isOverlapping(a.pos, a.size, b.pos, b.size)
+  return isOverlapping(a.pos, a.size.scale(1.1), b.pos, b.size.scale(1.1))
 }
 
 /**

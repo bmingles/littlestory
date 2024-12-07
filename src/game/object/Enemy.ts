@@ -1,10 +1,4 @@
-import {
-  Color,
-  engineObjects,
-  isOverlapping,
-  vec2,
-  type Vector2,
-} from 'littlejsengine'
+import { Color, engineObjects, vec2, type Vector2 } from 'littlejsengine'
 import type { AnimationID, EntityData, IEnemy } from '../model'
 import { Character } from './Character'
 import { isColliding, isPlayer } from '../util'
@@ -19,8 +13,7 @@ export class Enemy extends Character implements IEnemy {
 
     const player = engineObjects.find(isPlayer)
 
-    // TODO: figure out why isColliding doesn't work (seems to be bug with custom sizes)
-    if (player && isOverlapping(this.pos, vec2(1), player.pos, vec2(1))) {
+    if (player && isColliding(this, player)) {
       const force = vec2().setAngle(this.angle, this.attack)
       player.damage(force)
     }

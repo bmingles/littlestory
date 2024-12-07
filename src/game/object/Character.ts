@@ -6,7 +6,7 @@ import type {
   IMovementController,
 } from '../model'
 import { getDirectionAngle } from '../util'
-import { Color, type Vector2 } from 'littlejsengine'
+import { Color, Timer, type Vector2 } from 'littlejsengine'
 import { Healthbar } from './Healthbar'
 
 export class Character extends Entity implements ICharacter {
@@ -19,6 +19,8 @@ export class Character extends Entity implements ICharacter {
     super(type, entity, animation)
     this.setCollision(true, true)
 
+    this.color = new Color(1, 1, 1)
+    this.hitTimer = new Timer()
     this.life = 1
 
     this.healthBar = new Healthbar(healthBarColor)
@@ -26,6 +28,7 @@ export class Character extends Entity implements ICharacter {
   }
 
   healthBar: Healthbar
+  hitTimer: Timer
   life: number
   movementController?: IMovementController
   orientCollisionBoxWithDirection: boolean = true
@@ -39,7 +42,7 @@ export class Character extends Entity implements ICharacter {
   }
 
   damage(force?: Vector2): void {
-    if (force == null) {
+    if (force == null || this.hitTimer.active()) {
       return
     }
 
@@ -50,6 +53,8 @@ export class Character extends Entity implements ICharacter {
 
     this.applyForce(force)
 
+    this.hitTimer.set(0.6)
+
     if (this.life < 0.01) {
       this.destroy()
     }
@@ -57,6 +62,13 @@ export class Character extends Entity implements ICharacter {
 
   update() {
     super.update()
+
+    if (this.hitTimer.active()) {
+      const bit = Math.floor(this.hitTimer.getPercent() * 10) % 2
+      this.color.a = bit ? 0.3 : 1
+    } else {
+      this.color.a = 1
+    }
 
     if (this.movementController) {
       this.movementController.update()

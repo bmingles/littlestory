@@ -43,10 +43,7 @@ export class Character extends Entity implements ICharacter {
       return
     }
 
-    const { defense = 1 } = this.entity.customFields ?? {}
-
-    const damage = force.length() / defense
-    console.log('damage:', this.entity.id, force.length(), { defense, damage })
+    const damage = force.length() / this.defense
 
     this.life = Math.max(0, this.life - damage)
     this.healthBar.value = this.life

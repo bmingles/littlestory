@@ -10,7 +10,10 @@ export interface EntityData {
   width?: number
   height?: number
   color?: number
-  customFields?: {}
+  customFields?: {
+    attack?: number
+    defense?: number
+  }
 }
 
 /* LDTK level data */

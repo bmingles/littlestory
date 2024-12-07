@@ -14,9 +14,11 @@ export interface IEntity extends EngineObject {
 }
 
 export interface ICharacter extends IEntity {
+  readonly attack: number
+  readonly defense: number
   life: number
   movementController?: IMovementController
-  takeDamage(force?: Vector2): void
+  damage(force?: Vector2): void
 }
 
 export interface IEnemy extends ICharacter {}

@@ -6,7 +6,7 @@ import { Weapon } from './Weapon'
 
 export class Player extends Character implements IPlayer {
   constructor(entity: EntityData, animation?: AnimationID) {
-    super('player', entity, animation, new Color().setHex('#0f0'))
+    super('player', entity, animation, new Color(0, 1, 0))
 
     this.weapon = new Weapon('weapon')
     this.addChild(this.weapon)

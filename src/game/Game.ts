@@ -3,7 +3,6 @@ import {
   engineInit,
   keyWasPressed,
   mainCanvasSize,
-  mouseWasPressed,
   paused,
   setCameraPos,
   setObjectDefaultDamping,
@@ -78,10 +77,12 @@ export class Game {
   }
 
   private constructor(startLevelData: LevelData) {
+    this._hasStarted = false
     this._startLevelData = startLevelData
   }
 
   private readonly _startLevelData: LevelData
+  private _hasStarted: boolean
 
   init = () => {
     setObjectDefaultDamping(Settings.accelerationRate)
@@ -102,7 +103,11 @@ export class Game {
   update = () => {}
 
   updatePost = () => {
-    if (keyWasPressed('KeyP')) {
+    if (
+      (!this._hasStarted && keyWasPressed('Space')) ||
+      keyWasPressed('KeyP')
+    ) {
+      this._hasStarted = true
       setPaused(!paused)
     }
   }
@@ -111,7 +116,11 @@ export class Game {
 
   renderPost = () => {
     if (paused) {
-      drawTextScreen('Paused', mainCanvasSize.scale(0.5), 80)
+      drawTextScreen(
+        this._hasStarted ? 'Paused' : 'Press Space',
+        mainCanvasSize.scale(0.5),
+        80,
+      )
     }
   }
 }

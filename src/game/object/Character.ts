@@ -21,10 +21,7 @@ export class Character extends Entity implements ICharacter {
 
     this.life = 1
 
-    this.healthBar = new Healthbar()
-    if (healthBarColor) {
-      this.healthBar.color = healthBarColor
-    }
+    this.healthBar = new Healthbar(healthBarColor)
     this.addChild(this.healthBar)
   }
 
@@ -33,17 +30,30 @@ export class Character extends Entity implements ICharacter {
   movementController?: IMovementController
   orientCollisionBoxWithDirection: boolean = true
 
-  takeDamage(force?: Vector2): void {
+  get attack(): number {
+    return this.entity.customFields?.attack ?? 1
+  }
+
+  get defense(): number {
+    return this.entity.customFields?.defense ?? 1
+  }
+
+  damage(force?: Vector2): void {
     if (force == null) {
       return
     }
 
-    this.life = Math.max(0, this.life - 0.21)
+    const { defense = 1 } = this.entity.customFields ?? {}
+
+    const damage = force.length() / defense
+    console.log('damage:', this.entity.id, force.length(), { defense, damage })
+
+    this.life = Math.max(0, this.life - damage)
     this.healthBar.value = this.life
 
     this.applyForce(force)
 
-    if (this.life === 0) {
+    if (this.life < 0.01) {
       this.destroy()
     }
   }

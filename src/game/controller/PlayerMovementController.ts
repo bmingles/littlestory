@@ -5,12 +5,14 @@ import { getDirection8 } from '../util'
 
 export class PlayerMovementController implements IMovementController {
   constructor(player: ICharacter) {
+    this.moveInput = vec2()
     this.player = player
   }
 
   isAttacking: boolean = false
   isRunning: boolean = false
-  player
+  player: ICharacter
+  moveInput: Vector2
 
   update(): void {
     this.isAttacking = keyIsDown('Space')
@@ -34,11 +36,11 @@ export class PlayerMovementController implements IMovementController {
   }
 
   nextDirection(): Direction {
-    return getDirection8(this.player.velocity, this.player.direction, true)
+    return getDirection8(this.moveInput, this.player.direction, true)
   }
 
   nextVelocity(): Vector2 {
-    const moveInput = vec2(
+    this.moveInput = vec2(
       Number(keyIsDown('ArrowRight')) - Number(keyIsDown('ArrowLeft')),
       Number(keyIsDown('ArrowUp')) - Number(keyIsDown('ArrowDown')),
     )
@@ -47,7 +49,7 @@ export class PlayerMovementController implements IMovementController {
       ? Settings.character.velocityRunMax
       : Settings.character.velocityWalkMax
 
-    const accel = moveInput.clampLength().scale(Settings.accelerationRate)
+    const accel = this.moveInput.clampLength().scale(Settings.accelerationRate)
     const velocity = this.player.velocity.add(accel).clampLength(maxVelocity)
 
     if (abs(velocity.x) < Settings.character.velocityMin) {

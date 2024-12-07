@@ -75,7 +75,15 @@ export class Character extends Entity implements ICharacter {
 
       this.velocity = this.movementController.nextVelocity()
       this.direction = this.movementController.nextDirection()
-      this.animation = this.movementController.nextAnimation()
+
+      const nextAnimation = this.movementController.nextAnimation()
+      // TODO: Reset animation when starting attack. Will need to be more robust
+      // to ensure animation also completes. Until then, having the animationFrame
+      // be more haphazard actually looks better.
+      // if (nextAnimation !== this.animation && nextAnimation === 'attack') {
+      //   this.animationFrame = 0
+      // }
+      this.animation = nextAnimation
 
       if (this.orientCollisionBoxWithDirection) {
         this.angle = getDirectionAngle(this.direction)

@@ -105,7 +105,7 @@ export class Game {
 
   updatePost = () => {
     if (
-      (!this._hasStarted && keyWasPressed('Space')) ||
+      (!this._hasStarted && keyWasPressed('Enter')) ||
       keyWasPressed('KeyP')
     ) {
       this._hasStarted = true
@@ -118,9 +118,9 @@ export class Game {
   renderPost = () => {
     if (paused) {
       drawTextScreen(
-        this._hasStarted ? 'Paused' : 'Press Space',
+        this._hasStarted ? 'Paused' : 'Press Enter',
         mainCanvasSize.scale(0.5),
-        80,
+        40,
       )
     }
   }

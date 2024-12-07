@@ -52,6 +52,7 @@ export class Game {
           frames: 8,
         }),
       },
+      sword: {},
     })
 
     const { init, update, updatePost, render, renderPost } = new Game(

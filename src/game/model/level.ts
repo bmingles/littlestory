@@ -11,6 +11,7 @@ export interface EntityData {
   height?: number
   color?: number
   customFields?: {
+    animationSpeed?: number
     attack?: number
     defense?: number
   }

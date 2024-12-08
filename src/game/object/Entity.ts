@@ -37,11 +37,15 @@ export class Entity extends EngineObject implements IEntity {
   drawOffset?: Vector2
   renderAngle?: number
 
+  get animationSpeed(): number {
+    return this.entity.customFields?.animationSpeed ?? 1
+  }
+
   update() {
     super.update()
 
     const speed = 0.3
-    this.animationFrame = this.animationFrame + speed
+    this.animationFrame = this.animationFrame + speed * this.animationSpeed
 
     this.renderOrder = 1000 - this.pos.y
   }

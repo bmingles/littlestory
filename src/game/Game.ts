@@ -21,8 +21,13 @@ export class Game {
     const startLevelData = await fetchLevelData(startLevelId)
 
     Sprite.init({
-      gem: { idle: { S: { pos: 1719, textureMatch: 'tileset' } } },
-      heart: { idle: { S: { pos: 3052, textureMatch: 'tileset' } } },
+      gem: { idle: { S: { pos: 1719, textureMatch: 'tileset2' } } },
+      // heart: { idle: { S: { pos: 3052, textureMatch: 'tileset' } } },
+      heart: {
+        idle: {
+          S: { pos: 0, size: 32, textureMatch: 'heart', frames: 8 },
+        },
+      },
       player: {
         idle: createCharacterSpriteData({
           size: 128,
@@ -67,6 +72,8 @@ export class Game {
       renderPost,
       [
         '/tileset.png',
+        '/tileset2.png',
+        '/animations/heart.png',
         '/animations/hero-walk.png',
         '/animations/hero-run.png',
         '/animations/hero-attack-sword2.png',

@@ -22,7 +22,9 @@
 				"width": 16,
 				"height": 16,
 				"color": 12470831,
-				"customFields" : {}
+				"customFields": {
+					"animationSpeed": 0.5
+				}
 			},
 			{
 				"id": "heart",
@@ -33,7 +35,9 @@
 				"width": 16,
 				"height": 16,
 				"color": 12470831,
-				"customFields" : {}
+				"customFields": {
+					"animationSpeed": 0.5
+				}
 			},
 			{
 				"id": "heart",
@@ -44,7 +48,9 @@
 				"width": 16,
 				"height": 16,
 				"color": 12470831,
-				"customFields" : {}
+				"customFields": {
+					"animationSpeed": 0.5
+				}
 			}
 		],
 		"gem": [

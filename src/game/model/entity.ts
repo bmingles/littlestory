@@ -6,6 +6,7 @@ import type { IMovementController } from './controller'
 export type EntityType = 'gem' | 'heart' | 'player' | 'scorpion' | 'sword'
 
 export interface IEntity extends EngineObject {
+  readonly animationSpeed: number
   animation: AnimationID
   animationFrame: number
   direction: Direction

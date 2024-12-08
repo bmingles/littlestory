@@ -21,6 +21,7 @@ export class Healthbar extends EngineObject {
 
     this.isVisible = true
     this.localPos = HEALTH_BAR_OFFSET.rotate(this.parent.angle + PI * 2)
+    this.renderOrder = this.parent.renderOrder
   }
 
   render() {

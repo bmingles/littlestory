@@ -1,4 +1,7 @@
 export * from './Character'
+export * from './Enemy'
 export * from './Entity'
+export * from './Healthbar'
 export * from './Level'
 export * from './Player'
+export * from './Weapon'

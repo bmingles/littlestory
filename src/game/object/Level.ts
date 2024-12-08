@@ -9,6 +9,7 @@ import {
   PlayerMovementController,
 } from '../controller'
 import { Enemy } from './Enemy'
+import { Item } from './Item'
 
 export class Level extends EngineObject {
   constructor({ x, y, width, height, entities, imageUrl }: LevelData) {
@@ -41,6 +42,11 @@ export class Level extends EngineObject {
           )
           scorpion.drawSize = vec2(2.5)
           scorpion.size = vec2(0.6, 0.4)
+          break
+
+        case 'gem':
+        case 'heart':
+          new Item(entity)
           break
 
         default:
